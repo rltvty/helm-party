@@ -1,0 +1,6 @@
+name: old-datadog
+description: DaemonSet install of dd-agent to run on each node
+sources:
+- https://github.com/DataDog/dd-agent
+icon: https://datadog-live.imgix.net/img/dd_logo_70x75.png
+version: 0.0.2

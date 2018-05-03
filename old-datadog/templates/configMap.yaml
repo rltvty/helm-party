@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dd-agent-config
+data:
+  docker-daemon.yaml: |
+    init_config:
+      docker_root: /host
+    instances:
+      - ## Daemon and system configuration
+        url: "unix://var/run/docker.sock"
+        exclude: ["image_name:gcr.io/google_containers/pause-amd64"]
+        include: []
