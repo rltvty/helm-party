@@ -1,0 +1,41 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: node-marantz
+  labels:
+    app: node-marantz
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-marantz
+  template:
+    metadata:
+      labels:
+        app: node-marantz
+    spec:
+      containers:
+        - name: node-marantz
+          image: rltvty/node-marantz:latest
+          imagePullPolicy: Always
+          environment:
+            - MARANTZ_HOST=10.10.10.15
+          ports:
+            - name: http
+              containerPort: 3002
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /state
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /state
+              port: http
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
